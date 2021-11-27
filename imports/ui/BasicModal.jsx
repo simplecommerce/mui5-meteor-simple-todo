@@ -18,12 +18,20 @@ const style = {
 
 export default function BasicModal() {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  const [duration, setDuration] = React.useState(null);
+  const handleOpen = () => {
+    const now = Date.now();
+    setOpen(true);
+    setTimeout(() => {
+      setDuration(Date.now() - now);
+    })    
+  };
   const handleClose = () => setOpen(false);
 
   return (
     <div>
       <Button onClick={handleOpen}>Open modal</Button>
+      {duration && `Took ${duration}ms`}
       <Modal
         open={open}
         onClose={handleClose}

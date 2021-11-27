@@ -20,12 +20,20 @@ const style = {
 
 export default function TransitionsModal() {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  const [duration, setDuration] = React.useState(null);
+  const handleOpen = () => {
+    const now = Date.now();
+    setOpen(true);
+    setTimeout(() => {
+      setDuration(Date.now() - now);
+    })    
+  };
   const handleClose = () => setOpen(false);
 
   return (
     <div>
       <Button onClick={handleOpen}>Open transitions modal</Button>
+      {duration && `Took ${duration}ms`}
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"

@@ -6,8 +6,14 @@ import MenuItem from '@mui/material/MenuItem';
 export default function BasicMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const [duration, setDuration] = React.useState(null);
+
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+    const now = Date.now();
+    setAnchorEl(event.currentTarget);    
+    setTimeout(() => {
+      setDuration(Date.now() - now);
+    })    
   };
   const handleClose = () => {
     setAnchorEl(null);
@@ -24,6 +30,7 @@ export default function BasicMenu() {
       >
         Dashboard
       </Button>
+      {duration && `Took ${duration}ms`}
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}

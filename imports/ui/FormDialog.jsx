@@ -9,9 +9,14 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
+  const [duration, setDuration] = React.useState(null);
 
   const handleClickOpen = () => {
+    const now = Date.now();
     setOpen(true);
+    setTimeout(() => {
+      setDuration(Date.now() - now);
+    })    
   };
 
   const handleClose = () => {
@@ -23,6 +28,7 @@ export default function FormDialog() {
       <Button variant="outlined" onClick={handleClickOpen}>
         Open form dialog
       </Button>
+      {duration && `Took ${duration}ms`}
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Subscribe</DialogTitle>
         <DialogContent>
